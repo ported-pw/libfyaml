@@ -13,7 +13,9 @@
 #endif
 
 #include <stdint.h>
-#include <alloca.h>
+#if !defined(__FreeBSD__)
+	#include <alloca.h>
+#endif
 #include <string.h>
 #include <assert.h>
 

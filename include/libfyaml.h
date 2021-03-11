@@ -37,7 +37,9 @@ extern "C" {
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <alloca.h>
+#if !defined(__FreeBSD__)
+	#include <alloca.h>
+#endif
 
 /* opaque types for the user */
 struct fy_token;

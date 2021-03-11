@@ -17,7 +17,9 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <stdarg.h>
-#include <alloca.h>
+#if !defined(__FreeBSD__)
+	#include <alloca.h>
+#endif
 
 #include <libfyaml.h>
 
