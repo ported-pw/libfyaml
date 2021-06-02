@@ -6250,15 +6250,17 @@ static void update_xx32(void *state, const void *ptr, size_t size)
 
 int fy_node_hash_uint(struct fy_node *fyn, unsigned int *hashp)
 {
-	XXH32_state_t state;
+	XXH32_state_t* state = XXH32_createState();
 	int rc;
 
-	XXH32_reset(&state, 2654435761U);
+	XXH32_reset(state, 2654435761U);
 
-	rc = fy_node_hash_internal(fyn, update_xx32, &state);
+	rc = fy_node_hash_internal(fyn, update_xx32, state);
 	if (rc)
 		return rc;
 
-	*hashp = XXH32_digest(&state);
+	*hashp = XXH32_digest(state);
+
+    XXH32_freeState(state);
 	return 0;
 }
